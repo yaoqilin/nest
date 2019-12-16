@@ -1,6 +1,20 @@
-import {Body, Controller, Get, Header, HttpCode, Param, Post, Query, Redirect, Req} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    ForbiddenException,
+    Get,
+    Header,
+    HttpCode,
+    Param,
+    Post,
+    Query,
+    Redirect,
+    Req,
+    UseFilters
+} from '@nestjs/common';
 import {Request} from 'express';
 import {CreateCatDto} from './create-cat.dto';
+import {HttpExceptionFilter} from "../http-exception.filter";
 
 @Controller('cats')
 export class CatsController {
@@ -41,9 +55,15 @@ export class CatsController {
     // async findAll(): Promise<any[]> {
     //     return [];
     // }
+    // @Post()
+    // async create(@Body() createCatDto: CreateCatDto) {
+    //     this.catsService.create(createCatDto);
+    //     return '这个操作添加新的cat';
+    // }
     @Post()
+    @UseFilters(new HttpExceptionFilter())
     async create(@Body() createCatDto: CreateCatDto) {
-        this.catsService.create(createCatDto);
-        return '这个操作添加新的cat';
+        throw new ForbiddenException();
     }
+
 }
