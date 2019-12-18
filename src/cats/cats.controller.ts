@@ -10,11 +10,11 @@ import {
     Query,
     Redirect,
     Req,
-    UseFilters
+    UseFilters,
 } from '@nestjs/common';
 import {Request} from 'express';
 import {CreateCatDto} from './create-cat.dto';
-import {HttpExceptionFilter} from "../http-exception.filter";
+import {HttpExceptionFilter} from '../http-exception.filter';
 
 @Controller('cats')
 export class CatsController {
