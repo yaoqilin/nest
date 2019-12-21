@@ -10,12 +10,14 @@ import {
     Query,
     Redirect,
     Req,
-    UseFilters,
+    UseFilters, UseInterceptors,
 } from '@nestjs/common';
 import {Request} from 'express';
 import {CreateCatDto} from './create-cat.dto';
 import {HttpExceptionFilter} from '../http-exception.filter';
+import {LoggingInterceptor} from '../interceptor/logging.interceptor';
 
+@UseInterceptors(new LoggingInterceptor())
 @Controller('cats')
 export class CatsController {
     constructor(private readonly catsService: CatsController) {}
